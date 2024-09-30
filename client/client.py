@@ -88,8 +88,9 @@ def get_image(image_id, simple_cache=False, t=1, display=True):
     if not cached_image:
         server_response = request_image(image_id, simple_cache, t)
 
-        if 'use_cached_image' in server_response:
-            cached_image_id = server_response['use_cached_image']
+        if 'use_cached' in server_response:
+            cached_image_id = server_response['use_cached']
+            print(f'USING CACHED IMAGE {cached_image_id}')
             image_id = cached_image_id 
         elif 'image_data' in server_response:
             save_image_to_cache(server_response)
@@ -101,5 +102,5 @@ def get_image(image_id, simple_cache=False, t=1, display=True):
     return bytes_downloaded
     
 if __name__ == "__main__":
-    image_id = "img_1153"
-    bytes_downloaded = get_image(image_id, simple_cache=False, t=1)
+    image_id = "image_1260"
+    bytes_downloaded = get_image(image_id, simple_cache=False, t=1, display=False)
